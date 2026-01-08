@@ -9,15 +9,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
 
 /* ===== BASE ===== */
-body{
+  body{
   margin:0;
   min-height:100vh;
   background: linear-gradient(135deg,#ffe4ec,#fff7fa);
   display:flex;
   justify-content:center;
-  align-items:center;
+  align-items:flex-start;
   font-family:'Segoe UI', sans-serif;
-  overflow:hidden;
+
+  overflow-y: auto;   /* ✅ scroll allow */
+  overflow-x: hidden; /* left-right band */
 }
 
 /* ===== CARD ===== */
@@ -338,7 +340,7 @@ function toggleText(box){
 /* ===== LETTER PAGE ===== */
 function showLetter(){
   document.getElementById("page").innerHTML = `
-  
+
     <h1>For you baby💖</h1>
 
     <div class="envelope-wrap">
