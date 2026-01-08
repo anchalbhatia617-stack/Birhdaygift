@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For My Love 🤍</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+
+/* ===== BASE ===== */
+body{
+  margin:0;
+  min-height:100vh;
+  background: linear-gradient(135deg,#ffe4ec,#fff7fa);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-family:'Segoe UI', sans-serif;
+  overflow:hidden;
+}
+
+/* ===== CARD ===== */
+.card{
+  width:90%;
+  max-width:360px;
+  background:white;
+  padding:30px 22px;
+  border-radius:25px;
+  text-align:center;
+  box-shadow:0 20px 40px rgba(255,111,145,0.25);
+  animation: pop 0.9s ease;
+  position:relative;
+  z-index:2;
+}
+
+h1{
+  font-family:'Pacifico', cursive;
+  color:#ff5d8f;
+  font-weight:normal;
+  font-size:34px;
+}
+
+.subtitle{
+  color:#777;
+  font-size:14px;
+  margin:15px 0 22px;
+}
+
+/* ===== BUTTON ===== */
+button{
+  padding:12px 30px;
+  border:none;
+  border-radius:30px;
+  background:#ff5d8f;
+  color:white;
+  font-size:15px;
+  cursor:pointer;
+  box-shadow:0 8px 20px rgba(255,93,143,0.4);
+  animation:pulse 2s infinite;
+}
+
+/* ===== INPUT ===== */
+input{
+  padding:12px;
+  width:70%;
+  border-radius:25px;
+  border:1px solid #ffb3c6;
+  text-align:center;
+  font-size:18px;
+  letter-spacing:6px;
+  outline:none;
+}
+
+/* ===== PHOTO GRID ===== */
+.photo-grid{
+  display:grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap:12px;
+  margin-top:20px;
+}
+
+.photo-grid img{
+  width:100%;
+  height:160px;
+  object-fit:cover;
+  border-radius:18px;
+  box-shadow:0 12px 25px rgba(0,0,0,0.15);
+  animation: photoPop 0.9s ease;
+}
+
+/* ===== FLOATING EMOJIS ===== */
+.emoji{
+  position:absolute;
+  bottom:-40px;
+  font-size:22px;
+  animation: floatUp linear infinite;
+  opacity:0.9;
+}
+
+/* ===== ANIMATIONS ===== */
+@keyframes pop{
+  from{transform:scale(0.85);opacity:0;}
+  to{transform:scale(1);opacity:1;}
+}
+
+@keyframes pulse{
+  0%{transform:scale(1);}
+  50%{transform:scale(1.06);}
+  100%{transform:scale(1);}
+}
+
+@keyframes photoPop{
+  from{transform:scale(0.85);opacity:0;}
+  to{transform:scale(1);opacity:1;}
+}
+
+@keyframes floatUp{
+  from{transform:translateY(0);opacity:0;}
+  20%{opacity:1;}
+  to{transform:translateY(-120vh);opacity:0;}
+  /* ===== ENVELOPE ===== */
+}
+.envelope-wrap{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  margin-top:20px;
+}
+.envelope{
+  width:220px;
+  height:140px;
+  background:#fff;
+  border-radius:12px;
+  position:relative;
+  cursor:pointer;
+  box-shadow:0 15px 30px rgba(0,0,0,0.2);
+  animation: pop 0.8s ease;
+}
+
+.envelope::before{
+  content:"";
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:#ff8fab;
+  clip-path: polygon(0 0, 50% 50%, 100% 0, 100% 100%, 0 100%);
+}
+
+.envelope-heart{
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  font-size:26px;
+}
+
+/* ===== LETTER ===== */
+.letter{
+  display:none;
+  background:#fffaf0;
+  padding:20px;
+  border-radius:12px;
+  box-shadow:0 20px 40px rgba(0,0,0,0.25);
+  animation: pop 0.7s ease;
+  text-align:left;
+}
+
+.letter h2{
+  font-family:'Pacifico', cursive;
+  color:#ff5d8f;
+  text-align:center;
+}
+
+.letter p{
+  font-size:14px;
+  line-height:1.8;
+  color:#555;
+}
+/* ===== CUTE EMOJI FLOAT ===== */
+.cute-emoji{
+  position:fixed;
+  bottom:-30px;
+  font-size:20px;
+  animation: floatCute linear forwards;
+  opacity:0.9;
+  pointer-events:none;
+}
+
+@keyframes floatCute{
+  0%{
+    transform:translateY(0) scale(0.8);
+    opacity:0;
+  }
+  20%{opacity:1;}
+  100%{
+    transform:translateY(-120vh) scale(1.3);
+    opacity:0;
+  }
+}
+</style>
+</head>
+
+<body>
+ 
+  <audio id="bgMusic">
+  <source src="song.mp3" type="audio/mpeg">
+</audio>
+
+<!-- MAIN CONTAINER -->
+<div class="card" id="page">
+  <h1>Happy Birthday My ❤️</h1>
+
+  <div class="subtitle">
+    Today is your day,<br>
+    and I hope it makes you smile 💖
+  </div>
+
+  <button onclick="nextPage()">Start 🎁</button>
+</div>
+
+<script>
+
+function playMusic(){
+  const music = document.getElementById("bgMusic");
+  music.volume = 0.6;   // soft romantic sound
+  music.play();
+} 
+/* ===== FLOATING EMOJI GENERATOR ===== */
+setInterval(()=>{
+  const e = document.createElement("div");
+  e.className = "emoji";
+  const emojis = ["💖","💕","💗","❤️","🥰","✨"];
+  e.innerHTML = emojis[Math.floor(Math.random()*emojis.length)];
+  e.style.left = (5 + Math.random()*90) + "vw";
+  e.style.animationDuration = (6 + Math.random()*4) + "s";
+  document.body.appendChild(e);
+  setTimeout(()=>e.remove(),10000);
+},800);
+
+/* ===== PAGE 1 → PAGE 2 ===== */
+function nextPage(){
+  document.getElementById("page").innerHTML = `
+    <h1>Secret Locked 🔐</h1>
+
+    <div class="subtitle">
+      Is surprise ka password<br>
+      <b>hamara special day</b> hai 💕
+    </div>
+
+    <input id="pass" type="password" maxlength="4">
+
+    <br><br>
+
+    <button onclick="checkPass()">Unlock 💗</button>
+
+    <p id="error" style="color:#ff4d6d;font-size:13px;margin-top:12px;"></p>
+  `;
+}
+
+/* ===== PASSWORD CHECK ===== */
+function checkPass(){
+  const pass = document.getElementById("pass").value;
+  const error = document.getElementById("error");
+
+  if(pass === "0606"){
+    document.getElementById("page").innerHTML = `
+      <h1>Yayyy 🥰</h1>
+
+      <div class="subtitle">
+        Tumne sahi password dala 💖<br>
+        Ab asli magic shuru hota hai…
+      </div>
+
+      <button onclick="showPhotos()">Continue 💞</button>
+    `;
+  } else {
+    error.innerText = "Aww 😅 galat password… phir se try karo 💕";
+  }
+}
+
+/* ===== PHOTO PAGE ===== */
+function showPhotos(){
+  document.getElementById("page").innerHTML = `
+    <h1>Love Looks Like This 💖</h1>
+
+    <div class="photo-grid">
+
+      <div class="photo-box" onclick="toggleText(this)">
+        <img src="photos/pic1.jpg">
+        <div class="overlay">It's a dream pic with u baby 🤍</div>
+      </div>
+
+      <div class="photo-box" onclick="toggleText(this)">
+        <img src="photos/pic2.jpg">
+        <div class="overlay">My all time favorite pic 💕</div>
+      </div>
+
+      <div class="photo-box" onclick="toggleText(this)">
+        <img src="photos/pic3.jpg">
+        <div class="overlay">Every moment with you is special ✨</div>
+      </div>
+
+      <div class="photo-box" onclick="toggleText(this)">
+        <img src="photos/pic4.jpg">
+        <div class="overlay">This cute one jaan ❤️</div>
+      </div>
+
+      <div class="photo-box" onclick="toggleText(this)">
+        <img src="photos/pic5.jpg">
+        <div class="overlay">You make my heart smile 💖</div>
+      </div>
+
+      <div class="photo-box" onclick="toggleText(this)">
+        <img src="photos/pic6.jpg">
+        <div class="overlay">Loved one buggu 🥰</div>
+      </div>
+
+    </div>
+
+    <div class="subtitle" style="margin-top:15px;">
+      Every picture is a memory ❤️
+    </div>
+
+    <button onclick="showLetter()" style="margin-top:18px;">
+      Read My Letter 💌
+    </button>
+  `;
+}
+
+/* ===== TOGGLE OVERLAY TEXT ===== */
+function toggleText(box){
+  box.classList.toggle("active");
+}
+
+/* ===== LETTER PAGE ===== */
+function showLetter(){
+  document.getElementById("page").innerHTML = `
+  
+    <h1>For you baby💖</h1>
+
+    <div class="envelope-wrap">
+      <div class="envelope" onclick="openLetter()">
+        <div class="envelope-heart">💌</div>
+      </div>
+    </div>
+
+    <div class="subtitle">Tap on this 💕</div>
+
+    <div class="letter" id="letter">
+      <h2>For You, My Love 💖</h2>
+      <p>
+        To My Love 🤍,<br><br>
+
+        I know we haven't met yet,<br>
+        but every feeling I have for you is real.<br><br>
+
+        Every message of yours makes my heart smile,<br>
+        and every day with you feels special.<br><br>
+
+        This little letter is just to remind you<br>
+        how important you are to me 💕<br><br>
+
+        Happy Birthday, my beautiful girl 🎂❤️<br>
+        I love you always you forever you and ever you❤️<br><br>
+
+        — Yours Forever 💞
+      </p>
+    </div>
+  `;
+}
+
+function openLetter(){
+  document.querySelector(".envelope").style.display = "none";
+  document.getElementById("letter").style.display = "block";
+}
+</script>
