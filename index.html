@@ -15,38 +15,33 @@
   background: linear-gradient(135deg,#ffe4ec,#fff7fa);
   display:flex;
   justify-content:center;
-  align-items:flex-start;
+  align-items:center;
   font-family:'Segoe UI', sans-serif;
-
-  overflow-y: auto;   /* ✅ scroll allow */
-  overflow-x: hidden; /* left-right band */
+  overflow-x:hidden;
 }
-
 /* ===== CARD ===== */
 .card{
   width:90%;
-  max-width:360px;
+  max-width:320px;   /* 👈 mobile ke liye perfect */
   background:white;
-  padding:30px 22px;
-  border-radius:25px;
+  padding:24px 18px;
+  border-radius:22px;
   text-align:center;
   box-shadow:0 20px 40px rgba(255,111,145,0.25);
   animation: pop 0.9s ease;
-  position:relative;
-  z-index:2;
 }
 
 h1{
   font-family:'Pacifico', cursive;
   color:#ff5d8f;
   font-weight:normal;
-  font-size:34px;
+  font-size:28px;   /* phone ke liye perfect */
 }
 
 .subtitle{
   color:#777;
-  font-size:14px;
-  margin:15px 0 22px;
+  font-size:13px;
+  margin:12px 0 20px;
 }
 
 /* ===== BUTTON ===== */
